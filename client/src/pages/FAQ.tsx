@@ -2,9 +2,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { ArrowRight } from "lucide-react";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -25,18 +24,18 @@ export default function FAQ() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.05,
+        staggerChildren: 0.08,
         delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.4 },
+      transition: { duration: 0.5 },
     },
   };
 
@@ -45,16 +44,17 @@ export default function FAQ() {
       <Header />
 
       {/* Page Header */}
-      <section className="py-20 border-b border-border">
+      <section className="py-24 border-b border-border">
         <div className="container max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-4"
+            transition={{ duration: 0.7 }}
+            className="space-y-6"
           >
+            <div className="accent-line" />
             <h1 className="section-title">Frequently Asked Questions</h1>
-            <p className="section-subtitle">
+            <p className="section-subtitle text-lg">
               Find answers to common questions about our services and pricing.
             </p>
           </motion.div>
@@ -62,8 +62,8 @@ export default function FAQ() {
       </section>
 
       {/* FAQ Accordion */}
-      <section className="py-20">
-        <div className="container max-w-3xl">
+      <section className="py-32">
+        <div className="container max-w-4xl">
           <motion.div
             className="space-y-4"
             variants={containerVariants}
@@ -75,19 +75,20 @@ export default function FAQ() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className="card-minimal"
+                className="card-premium"
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-                  className="w-full flex items-center justify-between py-2"
+                  className="w-full flex items-center justify-between py-2 group"
                   aria-expanded={openIndex === idx}
                 >
-                  <h3 className="font-semibold text-left">{faq.q}</h3>
+                  <h3 className="font-semibold text-left text-lg group-hover:opacity-70 transition-opacity duration-300">{faq.q}</h3>
                   <motion.div
                     animate={{ rotate: openIndex === idx ? 180 : 0 }}
                     transition={{ duration: 0.3 }}
+                    className="flex-shrink-0"
                   >
-                    <ChevronDown size={20} className="flex-shrink-0" />
+                    <ChevronDown size={22} className="text-secondary-foreground" />
                   </motion.div>
                 </button>
 
@@ -98,9 +99,9 @@ export default function FAQ() {
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       transition={{ duration: 0.3 }}
-                      className="pt-4 border-t border-border"
+                      className="pt-6 border-t border-border"
                     >
-                      <p className="text-secondary-foreground">{faq.a}</p>
+                      <p className="text-secondary-foreground leading-relaxed text-base">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -111,18 +112,18 @@ export default function FAQ() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-border">
-        <div className="container max-w-2xl text-center">
+      <section className="py-32 border-t border-border">
+        <div className="container max-w-3xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-10"
           >
-            <div className="space-y-4">
+            <div className="space-y-6">
               <h2 className="section-title">Still have questions?</h2>
-              <p className="section-subtitle">
+              <p className="section-subtitle text-lg">
                 Our team is here to help. Reach out to us directly.
               </p>
             </div>
@@ -132,9 +133,9 @@ export default function FAQ() {
               whileTap={{ scale: 0.95 }}
             >
               <Link href="/contact">
-                <a className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-foreground text-background rounded-lg font-medium hover:opacity-80 transition-opacity">
+                <a className="btn-premium inline-flex">
                   Contact Our Team
-                  <ArrowRight size={18} />
+                  <ArrowRight size={20} />
                 </a>
               </Link>
             </motion.div>

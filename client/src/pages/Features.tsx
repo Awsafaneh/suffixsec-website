@@ -2,7 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 
 export default function Features() {
   const services = [
@@ -16,6 +16,7 @@ export default function Features() {
         "Physical security assessment",
         "Detailed vulnerability analysis",
       ],
+      icon: "🔍",
     },
     {
       title: "Security Audits",
@@ -27,6 +28,7 @@ export default function Features() {
         "Incident response procedures",
         "Security policy review",
       ],
+      icon: "📋",
     },
     {
       title: "Vulnerability Management",
@@ -38,6 +40,7 @@ export default function Features() {
         "Remediation tracking",
         "Compliance reporting",
       ],
+      icon: "🛡️",
     },
     {
       title: "Incident Response",
@@ -49,6 +52,7 @@ export default function Features() {
         "Threat containment",
         "Recovery assistance",
       ],
+      icon: "🚨",
     },
     {
       title: "Compliance Readiness",
@@ -60,6 +64,7 @@ export default function Features() {
         "Audit preparation",
         "Ongoing compliance monitoring",
       ],
+      icon: "✓",
     },
     {
       title: "DevSecOps Enablement",
@@ -71,6 +76,7 @@ export default function Features() {
         "Container security",
         "Infrastructure as code review",
       ],
+      icon: "⚙️",
     },
   ];
 
@@ -86,11 +92,11 @@ export default function Features() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.7 },
     },
   };
 
@@ -99,16 +105,17 @@ export default function Features() {
       <Header />
 
       {/* Page Header */}
-      <section className="py-20 border-b border-border">
+      <section className="py-24 border-b border-border">
         <div className="container max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-4"
+            transition={{ duration: 0.7 }}
+            className="space-y-6"
           >
+            <div className="accent-line" />
             <h1 className="section-title">Our Services</h1>
-            <p className="section-subtitle">
+            <p className="section-subtitle text-lg">
               Comprehensive security solutions tailored to your organization's needs
             </p>
           </motion.div>
@@ -116,10 +123,10 @@ export default function Features() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20">
+      <section className="py-32">
         <div className="container">
           <motion.div
-            className="space-y-20"
+            className="space-y-24"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -129,39 +136,41 @@ export default function Features() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start"
+                className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
               >
-                <div className="space-y-6">
-                  <div>
-                    <div className="text-sm font-medium text-secondary-foreground mb-2">
-                      Service {String(idx + 1).padStart(2, "0")}
+                <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
+                  <div className="space-y-8">
+                    <div>
+                      <div className="text-sm font-semibold text-secondary-foreground mb-4 uppercase tracking-wider">
+                        Service {String(idx + 1).padStart(2, "0")}
+                      </div>
+                      <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">{service.title}</h2>
+                      <p className="text-lg text-secondary-foreground leading-relaxed">{service.description}</p>
                     </div>
-                    <h2 className="text-3xl font-bold mb-4">{service.title}</h2>
-                    <p className="text-secondary-foreground">{service.description}</p>
-                  </div>
 
-                  <div>
-                    <h3 className="font-semibold mb-4">What's Included</h3>
-                    <ul className="space-y-3">
-                      {service.features.map((feature, fidx) => (
-                        <li key={fidx} className="flex items-start gap-3">
-                          <span className="w-1.5 h-1.5 bg-foreground rounded-full mt-2 flex-shrink-0" />
-                          <span className="text-secondary-foreground text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div>
+                      <h3 className="font-semibold text-lg mb-6">What's Included</h3>
+                      <ul className="space-y-4">
+                        {service.features.map((feature, fidx) => (
+                          <li key={fidx} className="flex items-start gap-4">
+                            <div className="flex-shrink-0 mt-1">
+                              <Check size={20} className="text-foreground" />
+                            </div>
+                            <span className="text-secondary-foreground text-base leading-relaxed">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
                 </div>
 
                 <motion.div
-                  className="card-minimal h-96 flex items-center justify-center"
-                  whileHover={{ scale: 1.02 }}
+                  className="card-premium h-96 flex items-center justify-center"
+                  whileHover={{ scale: 1.05 }}
                 >
                   <div className="text-center">
-                    <div className="text-6xl mb-4">
-                      {["🔍", "📋", "🛡️", "🚨", "✓", "⚙️"][idx]}
-                    </div>
-                    <p className="font-medium">{service.title}</p>
+                    <div className="text-8xl mb-6">{service.icon}</div>
+                    <p className="font-semibold text-lg">{service.title}</p>
                   </div>
                 </motion.div>
               </motion.div>
@@ -171,18 +180,18 @@ export default function Features() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 border-t border-border">
-        <div className="container max-w-2xl text-center">
+      <section className="py-32 border-t border-border">
+        <div className="container max-w-3xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.7 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-10"
           >
-            <div className="space-y-4">
+            <div className="space-y-6">
               <h2 className="section-title">Ready to get started?</h2>
-              <p className="section-subtitle">
+              <p className="section-subtitle text-lg">
                 Contact our team to discuss which services are right for your organization.
               </p>
             </div>
@@ -192,9 +201,9 @@ export default function Features() {
               whileTap={{ scale: 0.95 }}
             >
               <Link href="/contact">
-                <a className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-foreground text-background rounded-lg font-medium hover:opacity-80 transition-opacity">
+                <a className="btn-premium inline-flex">
                   Schedule a Consultation
-                  <ArrowRight size={18} />
+                  <ArrowRight size={20} />
                 </a>
               </Link>
             </motion.div>
