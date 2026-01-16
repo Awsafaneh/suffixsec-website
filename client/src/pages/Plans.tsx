@@ -77,8 +77,10 @@ export default function Plans() {
       <Header />
 
       {/* Page Header */}
-      <section className="py-24 border-b border-border">
-        <div className="container max-w-3xl">
+      <section className="py-24 border-b border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-neon opacity-35" />
+        
+        <div className="container max-w-3xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,8 +97,10 @@ export default function Plans() {
       </section>
 
       {/* Billing Toggle */}
-      <section className="py-16 border-b border-border">
-        <div className="container">
+      <section className="py-16 border-b border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-animated opacity-25" />
+        
+        <div className="container relative z-10">
           <motion.div
             className="flex items-center justify-center gap-6"
             initial={{ opacity: 0 }}
@@ -134,8 +138,10 @@ export default function Plans() {
       </section>
 
       {/* Plans Grid */}
-      <section className="py-32">
-        <div className="container">
+      <section className="py-32 relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-vibrant opacity-20" />
+        
+        <div className="container relative z-10">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             variants={containerVariants}
@@ -204,8 +210,10 @@ export default function Plans() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 border-t border-border">
-        <div className="container max-w-3xl text-center">
+      <section className="py-32 border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-sunset opacity-40" />
+        
+        <div className="container max-w-3xl text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

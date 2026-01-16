@@ -70,14 +70,17 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="min-h-[85vh] flex items-center justify-center py-24 relative overflow-hidden">
-        {/* Animated Background Gradients */}
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 -z-10 gradient-animated-slow opacity-60" />
+        
+        {/* Additional Layered Gradients */}
         <div className="absolute inset-0 -z-10 opacity-40">
           <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-indigo-300 to-purple-300 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-br from-pink-300 to-rose-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
           <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-gradient-to-br from-amber-300 to-orange-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
-        <div className="container max-w-5xl">
+        <div className="container max-w-5xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,8 +139,10 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 border-t border-border relative">
-        <div className="container">
+      <section className="py-32 border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-vibrant opacity-30" />
+        
+        <div className="container relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -186,8 +191,10 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 border-t border-border">
-        <div className="container">
+      <section className="py-20 border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 gradient-sunset opacity-25" />
+        
+        <div className="container relative z-10">
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-12"
             initial={{ opacity: 0 }}
@@ -220,10 +227,9 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-32 border-t border-border relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-300 to-purple-300 rounded-full blur-3xl" />
-        </div>
-        <div className="container max-w-3xl text-center">
+        <div className="absolute inset-0 -z-10 gradient-neon opacity-40" />
+        
+        <div className="container max-w-3xl text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

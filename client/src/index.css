@@ -165,6 +165,105 @@
     }
   }
 
+  /* Animated Gradient Backgrounds */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes gradient-shift-slow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes color-pulse {
+    0%, 100% {
+      opacity: 0.6;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .gradient-animated {
+    background: linear-gradient(
+      -45deg,
+      #ee7752,
+      #e73c7e,
+      #23a6d5,
+      #23d5ab
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+  }
+
+  .gradient-animated-slow {
+    background: linear-gradient(
+      135deg,
+      #667eea 0%,
+      #764ba2 25%,
+      #f093fb 50%,
+      #4facfe 75%,
+      #00f2fe 100%
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift-slow 20s ease infinite;
+  }
+
+  .gradient-vibrant {
+    background: linear-gradient(
+      45deg,
+      #ff6b6b,
+      #ee5a6f,
+      #c44569,
+      #f8b500,
+      #ffa502,
+      #ff6348
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 18s ease infinite;
+  }
+
+  .gradient-neon {
+    background: linear-gradient(
+      -45deg,
+      #ff00ff,
+      #00ffff,
+      #ffff00,
+      #ff00ff
+    );
+    background-size: 400% 400%;
+    animation: gradient-shift 12s ease infinite;
+  }
+
+  .gradient-sunset {
+    background: linear-gradient(
+      135deg,
+      #667eea 0%,
+      #764ba2 20%,
+      #f093fb 40%,
+      #4facfe 60%,
+      #00f2fe 80%,
+      #43e97b 100%
+    );
+    background-size: 300% 300%;
+    animation: gradient-shift 25s ease infinite;
+  }
+
   /* Premium Typography */
   .hero-text {
     @apply text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight;
