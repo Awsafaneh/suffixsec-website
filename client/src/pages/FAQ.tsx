@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AnimatedSection from "@/components/AnimatedSection";
+import AnimatedButton from "@/components/AnimatedButton";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -50,6 +53,26 @@ export default function FAQ() {
 
   const allItems = faqCategories.flatMap((cat) => cat.items);
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.05,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4 },
+    },
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
@@ -57,81 +80,173 @@ export default function FAQ() {
       {/* Page Header */}
       <section className="border-b border-border/40 bg-card/20 backdrop-blur-sm py-16">
         <div className="container">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Frequently Asked <span className="text-accent">Questions</span>
-          </h1>
-          <p className="text-lg text-secondary-foreground max-w-2xl">
-            Find answers to common questions about our services, pricing, and security practices.
-          </p>
+          <AnimatedSection direction="up">
+            <motion.h1
+              className="text-4xl md:text-5xl font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Frequently Asked <span className="text-accent">Questions</span>
+            </motion.h1>
+            <motion.p
+              className="text-lg text-secondary-foreground max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Find answers to common questions about our services, pricing, and security practices.
+            </motion.p>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* FAQ Accordion */}
       <section className="py-16 md:py-24">
         <div className="container max-w-3xl">
-          <div className="space-y-4">
+          <motion.div
+            className="space-y-4"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {allItems.map((item, idx) => (
-              <div key={idx} className="glass-card overflow-hidden">
-                <button
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="glass-card overflow-hidden hover-lift"
+              >
+                <motion.button
                   onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
                   className="w-full px-6 py-4 flex items-center justify-between hover:bg-secondary/20 transition-colors"
                   aria-expanded={openIndex === idx}
+                  whileHover={{ x: 5 }}
                 >
                   <h3 className="font-bold text-left text-foreground">{item.q}</h3>
-                  <ChevronDown
-                    className={`w-5 h-5 text-accent flex-shrink-0 transition-transform ${
-                      openIndex === idx ? "rotate-180" : ""
-                    }`}
-                  />
-                </button>
-                {openIndex === idx && (
-                  <div className="px-6 py-4 border-t border-border/40 bg-secondary/10">
-                    <p className="text-secondary-foreground leading-relaxed">{item.a}</p>
-                  </div>
-                )}
-              </div>
+                  <motion.div
+                    animate={{ rotate: openIndex === idx ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown className="w-5 h-5 text-accent flex-shrink-0" />
+                  </motion.div>
+                </motion.button>
+                <AnimatePresence>
+                  {openIndex === idx && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-6 py-4 border-t border-border/40 bg-secondary/10"
+                    >
+                      <motion.p
+                        className="text-secondary-foreground leading-relaxed"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        {item.a}
+                      </motion.p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Category Breakdown */}
       <section className="py-16 md:py-24 bg-card/20 backdrop-blur-sm border-y border-border/40">
         <div className="container">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            Browse by <span className="text-accent">Category</span>
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <AnimatedSection direction="left">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12">
+              Browse by <span className="text-accent">Category</span>
+            </h2>
+          </AnimatedSection>
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {faqCategories.map((cat, idx) => (
-              <div key={idx} className="glass-card p-6 hover-lift">
-                <h3 className="font-bold text-lg mb-4 text-accent">{cat.category}</h3>
-                <ul className="space-y-2">
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                className="glass-card p-6 hover-lift"
+                whileHover={{ scale: 1.05, y: -5 }}
+              >
+                <motion.h3
+                  className="font-bold text-lg mb-4 text-accent"
+                  animate={{ opacity: [0.8, 1, 0.8] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  {cat.category}
+                </motion.h3>
+                <motion.ul
+                  className="space-y-2"
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
                   {cat.items.map((item, iidx) => (
-                    <li key={iidx} className="text-sm text-secondary-foreground hover:text-foreground transition-colors cursor-pointer">
+                    <motion.li
+                      key={iidx}
+                      variants={itemVariants}
+                      className="text-sm text-secondary-foreground hover:text-accent transition-colors cursor-pointer"
+                      whileHover={{ x: 5 }}
+                    >
                       {item.q}
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
-              </div>
+                </motion.ul>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Still Have Questions */}
       <section className="py-16 md:py-24">
         <div className="container text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Still have questions?</h2>
-          <p className="text-lg text-secondary-foreground mb-8 max-w-2xl mx-auto">
-            Our team is here to help. Reach out to us directly for more information.
-          </p>
-          <Link href="/contact">
-            <a>
-              <Button size="lg" className="bg-accent text-accent-foreground hover:bg-cyan-400 glow-cyan">
-                Contact Our Team
-              </Button>
-            </a>
-          </Link>
+          <AnimatedSection direction="up">
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Still have questions?
+            </motion.h2>
+            <motion.p
+              className="text-lg text-secondary-foreground mb-8 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Our team is here to help. Reach out to us directly for more information.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
+              <Link href="/contact">
+                <a>
+                  <AnimatedButton className="bg-accent text-accent-foreground hover:bg-cyan-400 glow-cyan">
+                    Contact Our Team
+                  </AnimatedButton>
+                </a>
+              </Link>
+            </motion.div>
+          </AnimatedSection>
         </div>
       </section>
 
