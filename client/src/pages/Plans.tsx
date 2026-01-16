@@ -20,6 +20,7 @@ export default function Plans() {
         "Standard reporting",
         "Up to 5 assets",
       ],
+      gradient: "from-indigo-500 to-purple-500",
     },
     {
       name: "Pro",
@@ -33,6 +34,7 @@ export default function Plans() {
         "Up to 20 assets",
         "Dedicated account manager",
       ],
+      gradient: "from-pink-500 to-rose-500",
       highlight: true,
     },
     {
@@ -46,6 +48,7 @@ export default function Plans() {
         "Unlimited assets",
         "Dedicated security team",
       ],
+      gradient: "from-amber-500 to-orange-500",
     },
   ];
 
@@ -105,8 +108,8 @@ export default function Plans() {
               onClick={() => setBillingPeriod("monthly")}
               className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 ${
                 billingPeriod === "monthly"
-                  ? "bg-foreground text-background shadow-lg"
-                  : "border-2 border-border hover:border-foreground/50"
+                  ? "bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-lg"
+                  : "border-2 border-border hover:border-accent/50"
               }`}
             >
               Monthly
@@ -115,13 +118,13 @@ export default function Plans() {
               onClick={() => setBillingPeriod("yearly")}
               className={`px-8 py-3 rounded-lg font-semibold transition-all duration-300 relative ${
                 billingPeriod === "yearly"
-                  ? "bg-foreground text-background shadow-lg"
-                  : "border-2 border-border hover:border-foreground/50"
+                  ? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-lg"
+                  : "border-2 border-border hover:border-accent/50"
               }`}
             >
               Yearly
               {billingPeriod === "yearly" && (
-                <span className="absolute -top-4 -right-4 text-xs font-bold px-3 py-1 rounded-full bg-foreground text-background">
+                <span className="absolute -top-4 -right-4 text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 text-white">
                   Save 15%
                 </span>
               )}
@@ -144,18 +147,23 @@ export default function Plans() {
               <motion.div
                 key={idx}
                 variants={itemVariants}
-                className={`card-premium relative ${plan.highlight ? "ring-2 ring-foreground md:scale-105 md:-my-6" : ""}`}
+                className={`card-premium relative border-2 ${plan.highlight ? "ring-2 ring-offset-2 ring-offset-background md:scale-105 md:-my-6" : ""}`}
+                style={{
+                  borderImage: `linear-gradient(135deg, ${plan.gradient === "from-indigo-500 to-purple-500" ? "#6366f1, #a855f7" : plan.gradient === "from-pink-500 to-rose-500" ? "#ec4899, #f43f5e" : "#f59e0b, #ea580c"}) 1`,
+                }}
                 whileHover={{ y: -12 }}
               >
                 {plan.highlight && (
-                  <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-foreground text-background px-6 py-2 rounded-full text-sm font-bold shadow-lg">
+                  <div className={`absolute -top-5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r ${plan.gradient} text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg`}>
                     Most Popular
                   </div>
                 )}
 
                 <div className="space-y-8">
                   <div>
-                    <h3 className="text-2xl font-bold mb-4">{plan.name}</h3>
+                    <h3 className={`text-2xl font-bold mb-4 bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}>
+                      {plan.name}
+                    </h3>
                     <div className="text-5xl font-bold mb-2">
                       {plan.price ? (
                         plan.price
@@ -174,7 +182,7 @@ export default function Plans() {
                   </div>
 
                   <Link href="/contact">
-                    <a className="btn-premium w-full justify-center">
+                    <a className={`btn-premium w-full justify-center bg-gradient-to-r ${plan.gradient}`}>
                       Get Started
                       <ArrowRight size={18} />
                     </a>
@@ -183,7 +191,7 @@ export default function Plans() {
                   <ul className="space-y-4">
                     {plan.features.map((feature, fidx) => (
                       <li key={fidx} className="flex items-start gap-3">
-                        <Check size={20} className="flex-shrink-0 mt-0.5 text-foreground" />
+                        <Check size={20} className={`flex-shrink-0 mt-0.5 bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`} />
                         <span className="text-secondary-foreground text-sm leading-relaxed">{feature}</span>
                       </li>
                     ))}

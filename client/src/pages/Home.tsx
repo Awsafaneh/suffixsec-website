@@ -9,32 +9,38 @@ export default function Home() {
     { 
       title: "Penetration Testing", 
       desc: "Identify vulnerabilities before attackers do",
-      icon: Shield 
+      icon: Shield,
+      colorClass: "service-card-1 icon-bg-1 icon-color-1"
     },
     { 
       title: "Security Audits", 
       desc: "Comprehensive infrastructure and compliance analysis",
-      icon: CheckCircle 
+      icon: CheckCircle,
+      colorClass: "service-card-2 icon-bg-2 icon-color-2"
     },
     { 
       title: "Vulnerability Management", 
       desc: "Continuous identification and remediation",
-      icon: Zap 
+      icon: Zap,
+      colorClass: "service-card-3 icon-bg-3 icon-color-3"
     },
     { 
       title: "Incident Response", 
       desc: "24/7 rapid response to security threats",
-      icon: Shield 
+      icon: Shield,
+      colorClass: "service-card-4 icon-bg-4 icon-color-4"
     },
     { 
       title: "Compliance Readiness", 
       desc: "ISO 27001, PCI-DSS, HIPAA, SOC 2 certification",
-      icon: CheckCircle 
+      icon: CheckCircle,
+      colorClass: "service-card-5 icon-bg-5 icon-color-5"
     },
     { 
       title: "DevSecOps Enablement", 
       desc: "Security integrated into your development pipeline",
-      icon: Zap 
+      icon: Zap,
+      colorClass: "service-card-6 icon-bg-6 icon-color-6"
     },
   ];
 
@@ -64,10 +70,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="min-h-[85vh] flex items-center justify-center py-24 relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 -z-10 opacity-30">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
+        {/* Animated Background Gradients */}
+        <div className="absolute inset-0 -z-10 opacity-40">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-gradient-to-br from-indigo-300 to-purple-300 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-gradient-to-br from-pink-300 to-rose-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-gradient-to-br from-amber-300 to-orange-300 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
         </div>
 
         <div className="container max-w-5xl">
@@ -119,7 +126,7 @@ export default function Home() {
                 </a>
               </Link>
               <Link href="/features">
-                <a className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-foreground/20 rounded-xl font-semibold hover:border-foreground/40 transition-all duration-300">
+                <a className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-accent/30 rounded-xl font-semibold hover:border-accent/60 hover:bg-accent/5 transition-all duration-300">
                   Learn More
                 </a>
               </Link>
@@ -157,12 +164,12 @@ export default function Home() {
                 <motion.div
                   key={idx}
                   variants={itemVariants}
-                  className="card-premium group"
+                  className={`card-premium group border-2 ${service.colorClass}`}
                   whileHover={{ y: -8 }}
                 >
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 bg-foreground/5 rounded-lg group-hover:bg-foreground/10 transition-colors duration-300">
-                      <Icon size={24} className="text-foreground" />
+                    <div className={`p-3 rounded-lg ${service.colorClass.split(' ')[1]}`}>
+                      <Icon size={24} className={service.colorClass.split(' ')[2]} />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-bold text-lg mb-1 group-hover:opacity-80 transition-opacity">
@@ -189,9 +196,9 @@ export default function Home() {
             viewport={{ once: true }}
           >
             {[
-              { number: "500+", label: "Businesses Secured" },
-              { number: "99.9%", label: "Uptime Guarantee" },
-              { number: "24/7", label: "Expert Support" },
+              { number: "500+", label: "Businesses Secured", color: "from-indigo-500 to-purple-500" },
+              { number: "99.9%", label: "Uptime Guarantee", color: "from-pink-500 to-rose-500" },
+              { number: "24/7", label: "Expert Support", color: "from-amber-500 to-orange-500" },
             ].map((stat, idx) => (
               <motion.div
                 key={idx}
@@ -201,7 +208,9 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="text-5xl font-bold mb-3">{stat.number}</div>
+                <div className={`text-5xl font-bold mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                  {stat.number}
+                </div>
                 <p className="text-secondary-foreground text-lg">{stat.label}</p>
               </motion.div>
             ))}
@@ -210,7 +219,10 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 border-t border-border">
+      <section className="py-32 border-t border-border relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 opacity-30">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-300 to-purple-300 rounded-full blur-3xl" />
+        </div>
         <div className="container max-w-3xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
