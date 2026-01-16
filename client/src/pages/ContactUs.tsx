@@ -1,12 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
-import AnimatedSection from "@/components/AnimatedSection";
-import AnimatedButton from "@/components/AnimatedButton";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -69,31 +66,24 @@ export default function ContactUs() {
       <Header />
 
       {/* Page Header */}
-      <section className="border-b border-border/40 bg-card/20 backdrop-blur-sm py-16">
-        <div className="container">
-          <AnimatedSection direction="up">
-            <motion.h1
-              className="text-4xl md:text-5xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              Get in <span className="text-accent">Touch</span>
-            </motion.h1>
-            <motion.p
-              className="text-lg text-secondary-foreground max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Have questions about our services? Our team is ready to help you secure your business.
-            </motion.p>
-          </AnimatedSection>
+      <section className="py-20 border-b border-border">
+        <div className="container max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-4"
+          >
+            <h1 className="section-title">Get in Touch</h1>
+            <p className="section-subtitle">
+              Have questions? Our team is ready to help you secure your business.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 md:py-24">
+      <section className="py-20">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Form */}
@@ -113,15 +103,14 @@ export default function ContactUs() {
                     viewport={{ once: true }}
                   >
                     <label className="block text-sm font-semibold mb-2">Full Name</label>
-                    <motion.input
+                    <input
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-foreground placeholder-secondary-foreground"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground"
                       placeholder="Your name"
-                      whileFocus={{ scale: 1.02 }}
                     />
                   </motion.div>
                   <motion.div
@@ -131,15 +120,14 @@ export default function ContactUs() {
                     viewport={{ once: true }}
                   >
                     <label className="block text-sm font-semibold mb-2">Work Email</label>
-                    <motion.input
+                    <input
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-foreground placeholder-secondary-foreground"
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground"
                       placeholder="your@company.com"
-                      whileFocus={{ scale: 1.02 }}
                     />
                   </motion.div>
                 </div>
@@ -151,15 +139,14 @@ export default function ContactUs() {
                   viewport={{ once: true }}
                 >
                   <label className="block text-sm font-semibold mb-2">Company</label>
-                  <motion.input
+                  <input
                     type="text"
                     name="company"
                     value={formData.company}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-foreground placeholder-secondary-foreground"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground"
                     placeholder="Your company name"
-                    whileFocus={{ scale: 1.02 }}
                   />
                 </motion.div>
 
@@ -170,13 +157,12 @@ export default function ContactUs() {
                   viewport={{ once: true }}
                 >
                   <label className="block text-sm font-semibold mb-2">Service Needed</label>
-                  <motion.select
+                  <select
                     name="service"
                     value={formData.service}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-foreground"
-                    whileFocus={{ scale: 1.02 }}
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground"
                   >
                     <option value="">Select a service</option>
                     {services.map((service) => (
@@ -184,7 +170,7 @@ export default function ContactUs() {
                         {service}
                       </option>
                     ))}
-                  </motion.select>
+                  </select>
                 </motion.div>
 
                 <motion.div
@@ -194,15 +180,14 @@ export default function ContactUs() {
                   viewport={{ once: true }}
                 >
                   <label className="block text-sm font-semibold mb-2">Message</label>
-                  <motion.textarea
+                  <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent text-foreground placeholder-secondary-foreground resize-none"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-foreground resize-none"
                     placeholder="Tell us about your security needs..."
-                    whileFocus={{ scale: 1.02 }}
                   />
                 </motion.div>
 
@@ -212,13 +197,13 @@ export default function ContactUs() {
                   transition={{ delay: 0.35 }}
                   viewport={{ once: true }}
                 >
-                  <AnimatedButton
+                  <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-accent text-accent-foreground hover:bg-cyan-400 glow-cyan"
+                    className="w-full px-8 py-3 bg-foreground text-background rounded-lg font-medium hover:opacity-80 transition-opacity disabled:opacity-50"
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
-                  </AnimatedButton>
+                  </button>
                 </motion.div>
               </form>
             </motion.div>
@@ -247,12 +232,12 @@ export default function ContactUs() {
                 {
                   icon: MapPin,
                   title: "Location",
-                  content: "123 Security Street\nSan Francisco, CA 94105\nUnited States",
+                  content: "123 Security Street\nSan Francisco, CA 94105",
                 },
                 {
                   icon: Clock,
                   title: "Business Hours",
-                  content: "Monday - Friday\n9:00 AM - 6:00 PM PST\n24/7 Support for Enterprise",
+                  content: "Monday - Friday\n9:00 AM - 6:00 PM PST",
                 },
               ].map((item, idx) => {
                 const Icon = item.icon;
@@ -260,27 +245,21 @@ export default function ContactUs() {
                   <motion.div
                     key={idx}
                     variants={itemVariants}
-                    className="glass-card p-6 hover-lift"
-                    whileHover={{ scale: 1.05, y: -5 }}
+                    className="card-minimal"
                   >
                     <div className="flex items-start gap-4">
-                      <motion.div
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 2, repeat: Infinity, delay: idx * 0.1 }}
-                      >
-                        <Icon className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
-                      </motion.div>
+                      <Icon size={24} className="flex-shrink-0 mt-1" />
                       <div>
-                        <h3 className="font-bold mb-2">{item.title}</h3>
+                        <h3 className="font-semibold mb-2">{item.title}</h3>
                         {item.href ? (
                           <a
                             href={item.href}
-                            className="text-secondary-foreground hover:text-accent transition-colors"
+                            className="text-secondary-foreground hover:opacity-60 transition-opacity"
                           >
                             {item.content}
                           </a>
                         ) : (
-                          <p className="text-secondary-foreground whitespace-pre-line">{item.content}</p>
+                          <p className="text-secondary-foreground whitespace-pre-line text-sm">{item.content}</p>
                         )}
                       </div>
                     </div>
@@ -289,76 +268,6 @@ export default function ContactUs() {
               })}
             </motion.div>
           </div>
-        </div>
-      </section>
-
-      {/* Why Contact Us */}
-      <section className="py-16 md:py-24 bg-card/20 backdrop-blur-sm border-y border-border/40">
-        <div className="container">
-          <AnimatedSection direction="left">
-            <h2 className="text-3xl md:text-4xl font-bold mb-12">
-              Why work with <span className="text-accent">SuffixSec?</span>
-            </h2>
-          </AnimatedSection>
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              { title: "Expert Team", desc: "Certified security professionals with 15+ years of experience" },
-              { title: "Fast Response", desc: "Initial consultation within 24 hours of contact" },
-              { title: "Proven Results", desc: "Trusted by Fortune 500 companies worldwide" },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={itemVariants}
-                className="glass-card p-6 hover-lift"
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <h3 className="font-bold text-lg mb-3">{item.title}</h3>
-                <p className="text-secondary-foreground">{item.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container text-center">
-          <AnimatedSection direction="up">
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Ready to get started?
-            </motion.h2>
-            <motion.p
-              className="text-lg text-secondary-foreground mb-8 max-w-2xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              Schedule a free consultation with our security experts today.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-              <AnimatedButton className="bg-accent text-accent-foreground hover:bg-cyan-400 glow-cyan">
-                Book a Call
-              </AnimatedButton>
-            </motion.div>
-          </AnimatedSection>
         </div>
       </section>
 

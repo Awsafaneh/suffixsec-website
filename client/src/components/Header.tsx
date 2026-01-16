@@ -1,17 +1,12 @@
 import { Link } from "wouter";
-import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { motion } from "framer-motion";
 import { useState } from "react";
+import { Menu, X } from "lucide-react";
 
-/**
- * Neo-brutalist Header Component
- * Sticky header with blur effect, minimal navigation, and primary CTA
- * Design: Clean, geometric, high-contrast
- */
 export default function Header() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
+  const navItems = [
     { label: "Features", href: "/features" },
     { label: "Plans", href: "/plans" },
     { label: "FAQ", href: "/faq" },
@@ -19,84 +14,77 @@ export default function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-      <div className="container flex items-center justify-between h-16">
-        {/* Logo */}
-        <Link href="/">
-          <a className="flex items-center gap-2 font-bold text-xl hover:opacity-80 transition-opacity">
-            <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm font-bold">S</span>
-            </div>
-            <span className="hidden sm:inline text-foreground">SuffixSec</span>
-          </a>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <a className="text-sm text-secondary-foreground hover:text-accent transition-colors duration-200">
-                {link.label}
-              </a>
-            </Link>
-          ))}
-        </nav>
-
-        {/* CTA Button */}
-        <div className="flex items-center gap-4">
-          <Link href="/contact">
-            <a className="hidden sm:block">
-              <Button 
-                size="sm"
-                className="bg-accent text-accent-foreground hover:bg-cyan-400 transition-all duration-200 glow-cyan"
-              >
-                Book a Security Call
-              </Button>
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
+      <div className="container py-6">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/">
+            <a className="text-2xl font-bold tracking-tight hover:opacity-70 transition-opacity">
+              SuffixSec
             </a>
           </Link>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
-            aria-label="Toggle menu"
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <a className="text-sm font-medium hover:opacity-60 transition-opacity">
+                  {item.label}
+                </a>
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA Button */}
+          <motion.div
+            className="hidden md:block"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {mobileMenuOpen ? (
-              <X className="w-5 h-5 text-accent" />
-            ) : (
-              <Menu className="w-5 h-5 text-foreground" />
-            )}
+            <Link href="/contact">
+              <a className="px-6 py-2 bg-foreground text-background rounded-lg font-medium hover:opacity-80 transition-opacity">
+                Get Started
+              </a>
+            </Link>
+          </motion.div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 hover:opacity-60 transition-opacity"
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-      </div>
 
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border/40 bg-card/50 backdrop-blur-md">
-          <nav className="container py-4 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link key={link.href} href={link.href}>
-                <a 
-                  className="text-sm text-secondary-foreground hover:text-accent transition-colors py-2"
-                  onClick={() => setMobileMenuOpen(false)}
+        {/* Mobile Navigation */}
+        {isOpen && (
+          <motion.nav
+            className="md:hidden mt-6 pb-6 space-y-4 border-t border-border pt-6"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <a
+                  className="block text-sm font-medium hover:opacity-60 transition-opacity"
+                  onClick={() => setIsOpen(false)}
                 >
-                  {link.label}
+                  {item.label}
                 </a>
               </Link>
             ))}
             <Link href="/contact">
-              <a onClick={() => setMobileMenuOpen(false)}>
-                <Button 
-                  size="sm"
-                  className="w-full bg-accent text-accent-foreground hover:bg-cyan-400"
-                >
-                  Book a Security Call
-                </Button>
+              <a
+                className="block px-6 py-2 bg-foreground text-background rounded-lg font-medium text-center hover:opacity-80 transition-opacity"
+                onClick={() => setIsOpen(false)}
+              >
+                Get Started
               </a>
             </Link>
-          </nav>
-        </div>
-      )}
+          </motion.nav>
+        )}
+      </div>
     </header>
   );
 }
