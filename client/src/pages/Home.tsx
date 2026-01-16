@@ -215,7 +215,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className={`text-5xl font-bold mb-3 bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}>
+                <div className="text-5xl font-bold mb-3 text-foreground">
                   {stat.number}
                 </div>
                 <p className="text-secondary-foreground text-lg">{stat.label}</p>

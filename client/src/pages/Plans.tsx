@@ -167,7 +167,7 @@ export default function Plans() {
 
                 <div className="space-y-8">
                   <div>
-                    <h3 className={`text-2xl font-bold mb-4 bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`}>
+                    <h3 className="text-2xl font-bold mb-4 text-foreground">
                       {plan.name}
                     </h3>
                     <div className="text-5xl font-bold mb-2">
@@ -197,7 +197,7 @@ export default function Plans() {
                   <ul className="space-y-4">
                     {plan.features.map((feature, fidx) => (
                       <li key={fidx} className="flex items-start gap-3">
-                        <Check size={20} className={`flex-shrink-0 mt-0.5 bg-gradient-to-r ${plan.gradient} bg-clip-text text-transparent`} />
+                        <Check size={20} className="flex-shrink-0 mt-0.5 text-accent" />
                         <span className="text-secondary-foreground text-sm leading-relaxed">{feature}</span>
                       </li>
                     ))}

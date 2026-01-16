@@ -151,7 +151,7 @@ export default function Features() {
                 <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
                   <div className="space-y-8">
                     <div>
-                      <div className="text-sm font-semibold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4 uppercase tracking-wider">
+                      <div className="text-sm font-semibold text-accent mb-4 uppercase tracking-wider">
                         Service {String(idx + 1).padStart(2, "0")}
                       </div>
                       <h2 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">{service.title}</h2>
@@ -164,7 +164,7 @@ export default function Features() {
                         {service.features.map((feature, fidx) => (
                           <li key={fidx} className="flex items-start gap-4">
                             <div className="flex-shrink-0 mt-1">
-                              <Check size={20} className={`bg-gradient-to-r ${service.colorGradient} bg-clip-text text-transparent`} />
+                              <Check size={20} className="text-accent" />
                             </div>
                             <span className="text-secondary-foreground text-base leading-relaxed">{feature}</span>
                           </li>
@@ -179,7 +179,7 @@ export default function Features() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="text-center">
-                    <div className={`text-8xl mb-6 bg-gradient-to-br ${service.colorGradient} bg-clip-text text-transparent`}>
+                    <div className="text-8xl mb-6">
                       {service.icon}
                     </div>
                     <p className="font-semibold text-lg">{service.title}</p>
